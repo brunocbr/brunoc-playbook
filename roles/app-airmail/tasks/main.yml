@@ -1,0 +1,5 @@
+---
+- name: Install Airmail
+  community.general.mas:
+    id: 918858936
+    state: present

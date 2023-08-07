@@ -1,0 +1,8 @@
+---
+- name: Tap cask-fonts
+  homebrew_tap:
+    name: homebrew/cask-fonts
+- name: Install Source Code Pro Font
+  homebrew_cask:
+    name: font-source-code-pro
+    state: latest

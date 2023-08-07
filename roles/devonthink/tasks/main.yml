@@ -1,0 +1,29 @@
+---
+- name: Download DEVONthink Pro DMG
+  get_url:
+    url: "https://download.devontechnologies.com/download/devonthink/3.9.2/DEVONthink_3.dmg.zip"
+    dest: "/tmp/devonthink.dmg.zip"
+- name: Unzip DMG
+  command: "unzip -o /tmp/devonthink.dmg.zip -d /tmp"
+  register: unzip_result
+
+- name: Mount DEVONthink DMG
+  command: "yes Y | hdiutil attach /tmp/DEVONthink_3.dmg"
+  register: mounted_dmg
+  changed_when: false
+  when: unzip_result is succeeded
+
+- name: Copy DEVONthink to Applications
+  become: yes
+  command: "cp -R '/Volumes/DEVONthink 3/DEVONthink 3.app' '/Applications/'"
+  when: mounted_dmg is succeeded
+
+- name: Unmount DEVONthink DMG
+  command: "hdiutil detach '/Volumes/DEVONthink 3'"
+  when: mounted_dmg is succeeded
+
+- name: Remove downloaded DMG
+  file:
+    path: "/tmp/devonthink.dmg"
+    state: absent
+

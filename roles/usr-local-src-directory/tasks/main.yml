@@ -1,0 +1,14 @@
+---
+- name: Ensure that the /usr/local/src directory exists
+  file:
+    path: /usr/local/src
+    state: directory
+    owner: "{{ user }}"
+  become: yes
+
+- name: Ensure that the /usr/local/bin directory exists
+  file:
+    path: /usr/local/bin
+    state: directory
+    owner: "{{ user }}"
+  become: yes

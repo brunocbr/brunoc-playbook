@@ -1,0 +1,5 @@
+---
+- name: Install Google Drive
+  homebrew_cask:
+    name: google-drive
+    state: latest

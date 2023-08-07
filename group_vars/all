@@ -1,0 +1,5 @@
+# -*-yaml-*-
+---
+user: "{{ lookup('env', 'USER') }}"
+home_directory: "/Users/{{ user }}"
+downloads_directory: "{{ home_directory }}/.ansible/downloads"

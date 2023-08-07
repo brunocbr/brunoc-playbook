@@ -1,0 +1,9 @@
+---
+- name: Install Microsoft Excel
+  community.general.mas:
+    id: 462058435
+    state: present
+- name: Install Microsoft Word
+  community.general.mas:
+    id: 462054704
+    state: present

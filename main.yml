@@ -1,0 +1,179 @@
+---
+- hosts: localhost
+  connection: local
+  roles:
+    #############################################################################
+    # Foundational ##############################################################
+    #############################################################################
+
+    - role: homebrew
+      tags: [foundational, package-and-build, homebrew]
+
+    # Depends on homebrew.
+#    - role: git
+#      tags: [foundational, brew-pkg, git]
+
+    # Depends on homebrew.
+    - role: gnu-command-line-tools
+      tags: [foundational, brew-pkg, gnu-command-line-tools]
+    # Depends on homebrew.
+    - role: make
+      tags: [foundational, package-and-build, brew-pkg, make]
+
+    - role: cmake
+      tags: [foundational, package-and-build, bespoke-pkg, cmake]
+      vars:
+        # https://cmake.org/download/
+        cmake_version: "3.22.0"
+
+    - role: llvm
+      tags: [foundational, package-and-build, brew-pkg, llvm]
+
+    - role: openssl
+      tags: [foundational, package-and-build, brew-pkg, openssl]
+
+    # Depends on homebrew.
+    - role: bash
+      tags: [foundational, brew-pkg, programming-languages, bash]
+
+    - role: python3
+      tags: [foundational, programming-languages, bespoke-pkg, python3]
+      vars:
+        # NOTE: update PYTHON_VERSION in Makefile when changing this.
+        # https://www.python.org/ftp/python/
+        python3_version: "3.11.2"
+        # 11 is a "Universal 2" binary which works on Apple Silicon.
+        # 10.9 does not work on Apple Silicon.
+        python3_macos_version: "11" # this is used in the .pkg file name.
+        python3_version_major_minor: "{{ python3_version | regex_replace('^([0-9]+)\\.([0-9]+)(?:\\.[0-9]+)?$', '\\1.\\2') }}"
+
+    - role: mac-ports
+      tags: [foundational, package-and-build, bespoke-pkg, mac-ports]
+      vars:
+        # https://www.macports.org/install.php
+        macports_version: "2.8.1"
+#        macports_mac_release: "12-Monterey"
+        macports_mac_release: "10.15-Catalina"
+
+
+    - role: node
+      tags: [foundational, programming-languages, bespoke-pkg, node]
+      vars:
+        # https://nodejs.org/dist/
+        # https://github.com/nodejs/node/releases
+        node_version: "18.12.1"
+
+#    - role: maven
+#      tags: [foundational, package-and-build, brew-pkg, maven]
+
+    - role: emacs-pre-built
+      tags: [text-editors, bespoke-pkg, emacs-pre-built]
+      vars:
+        emacs_pre_built_version: "29.1"
+        emacs_pre_built_patch: ""
+
+    #############################################################################
+    # Fonts #####################################################################
+    #############################################################################
+
+    - role: font-hack
+      tags: [fonts, brew-cask-pkg, font-hack]
+
+    - role: consolas
+      tags: [fonts, bespoke-pkg, consolas]
+
+    - role: google-chrome
+      tags: [desktop-applications, brew-cask-pkg, google-chrome]
+
+    - role: google-drive
+      tags: [desktop-applications, brew-cask-pkg]
+
+    - role: app-alfred
+      tags: [desktop-applications, app-alfred, brew-cask-pkg]
+
+    - role: app-airmail
+      tags: [desktop-applications, macos, brew-cask-pkg, airmail]
+
+    - role: app-keyboard-maestro
+      tags: [desktop-applications, macos, brew-cask-pkg, keyboard-maestro]
+
+    - role: seafile-client-mac
+      tags: [desktop-applications, macos, pkg-installer, seafile-client]
+
+    - role: tailscale-mac
+      tags: [vpn, macos, tailscale]
+
+    - role: mas
+      tags: [macos, foundational, mas]
+
+#    - role: devonthink
+#      tags: [macos, desktop-applications, devonthink]
+
+    - role: better-touch-tool
+      tags: [configuration, bespoke-pkg, better-touch-tool, uses-secrets]
+      vars:
+        # https://folivora.ai/releases
+        better_touch_tool_version: "2.667" # using latest
+
+#    - role: gnu-tar-catalina
+#      tags: [foundational, gnu-tar-catalina]
+
+    - role: busycal
+      tags: [macos, busycal]
+
+    - role: app-agenda
+      tags: [macos, app-agenda]
+
+    - role: mindnode
+      tags: [macos, mindnode]
+
+    - role: popclip
+      tags: [macos, popclip, mac-tools]
+
+
+    - role: font-source-code-pro
+      tags: [editors, font-source-code-pro]
+
+    - role: spacemacs
+      tags: [macos, spacemacs]
+      vars:
+        users:
+          - username: brunoc
+
+#    - role: sophos-home-mac
+#      tags: [macos, sophos-home-mac]
+
+
+
+    #############################################################################
+    # Shell #####################################################################
+    #############################################################################
+
+    - role: babashka
+      tags: [shell, bespoke-pkg, babashka]
+
+    - role: zsh
+      tags: [shell, brew-pkg, zsh]
+
+    - role: fish
+      tags: [shell, brew-pkg, fish]
+
+    - role: fish-foreign-env
+      tags: [shell, bespoke-pkg, fish, fish-foreign-env]
+
+    - role: iterm
+      tags: [shell, brew-cask-pkg, iterm]
+
+    - role: tmux
+      tags: [shell, brew-pkg, tmux]
+
+    - role: tmuxinator
+      tags: [shell, gem-pkg, tmux, tmuxinator]
+
+
+
+
+    - role: microsoft-365
+      tags: [macos, microsoft-365]
+
+  

@@ -1,0 +1,26 @@
+---
+- name: Add Homebrew tap
+  command: brew tap daviderestivo/emacs-head
+
+- name: Install Emacs
+  homebrew:
+    name: emacs-head@29
+    state: latest
+    # https://github.com/daviderestivo/homebrew-emacs-head/blob/master/Formula/emacs-head@29.rb
+    install_options:
+      - with-cocoa
+      - with-crash-debug
+      - with-imagemagick
+      - with-modern-icon-pen
+      - with-native-comp
+      - with-no-frame-refocus
+      - with-pdumper
+      - with-tree-sitter
+      - with-xwidgets
+
+# NOTE: spotlight doesn't seem to pick up this symlink?
+- name: Create a symbolic link
+  ansible.builtin.file:
+    src: /opt/homebrew/Cellar/emacs-head@29/29.1/Emacs.app/
+    dest: /Applications/Emacs-29.app
+    state: link

@@ -1,0 +1,5 @@
+---
+- name: Install Tailscale Client
+  homebrew_cask:
+    name: tailscale
+    state: latest

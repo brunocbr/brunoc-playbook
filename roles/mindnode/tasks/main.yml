@@ -1,0 +1,5 @@
+---
+- name: Install MindNode
+  community.general.mas:
+    id: 1289197285
+    state: present

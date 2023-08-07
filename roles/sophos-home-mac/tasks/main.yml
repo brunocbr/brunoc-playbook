@@ -1,0 +1,27 @@
+---
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download Sophos Home ZIP
+  get_url:
+    url: "https://dzr-api-amzn-us-east-1-h0m3.api-upe.p.hmr.sophos.com/api/download/ba7daee7dde3f93b666ed0600bf4838c/SophosInstall.zip"
+    dest: "{{ temp_dir.path }}/SophosInstall.zip"
+
+- name: Unzip Sophos Home
+  unarchive:
+    src: "{{ temp_dir.path }}/SophosInstall.zip"
+    dest: "{{ temp_dir.path }}"
+    remote_src: yes
+  register: unzip_result
+
+- name: Run Sophos Home installer
+  become: yes
+  command: "'{{ temp_dir.path }}/SophosInstall/Sophos Installer.app/Contents/MacOS/tools/InstallationDeployer' --install"
+  when: unzip_result is succeeded
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent

@@ -1,0 +1,5 @@
+---
+- name: Install fish
+  homebrew:
+    name: fish
+    state: latest

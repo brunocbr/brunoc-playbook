@@ -1,0 +1,30 @@
+---
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download Seafile Client DMG
+  get_url:
+    url: "https://download.seadrive.org/seafile-client-9.0.3.dmg"
+    dest: "{{ temp_dir.path }}/seafile-client.dmg"
+
+- name: Mount Seafile Client DMG
+  command: "hdiutil attach {{ temp_dir.path }}/seafile-client.dmg"
+  register: mounted_dmg
+  changed_when: false
+
+- name: Copy Seafile Client to Applications
+  become: yes
+  command: "cp -R '/Volumes/Seafile Client/Seafile Client.app' '/Applications/'"
+  when: mounted_dmg is succeeded
+
+
+- name: Unmount Seafile Client DMG
+  command: "hdiutil detach '/Volumes/Seafile Client'"
+  when: mounted_dmg is succeeded
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent

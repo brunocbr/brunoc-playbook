@@ -1,0 +1,5 @@
+---
+- name: Install mas using Homebrew
+  homebrew_cask:
+    name: mas
+    state: latest

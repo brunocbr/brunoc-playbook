@@ -1,0 +1,25 @@
+---
+- name: Install cabextract
+  homebrew: name=cabextract state=present
+
+# Got it originally from here:
+# https://download.cnet.com/PowerPoint-Viewer/3001-2075_4-75450958.html
+- name: Download PowerPointViewer.exe
+  get_url:
+    url: https://macbook-playbook.s3.amazonaws.com/artifacts/PowerPointViewer.exe
+    dest: "{{ downloads_directory }}/PowerPointViewer.exe"
+
+- name: Make PowerPointViewer directory
+  command: mkdir -p "{{ downloads_directory }}/PowerPointViewer"
+
+- name: Extract PowerPointViewer.exe
+  command: cabextract "{{ downloads_directory }}/PowerPointViewer.exe" -d "{{ downloads_directory }}/PowerPointViewer"
+
+- name: Make ppviewer directory to extract fonts to
+  command: mkdir -p "{{ downloads_directory }}/ppviewer"
+
+- name: Extract ppviewer.cab
+  command: cabextract "{{ downloads_directory }}/PowerPointViewer/ppviewer.cab" -d "{{ downloads_directory }}/ppviewer"
+
+- name: Install Consolas
+  shell: open {{ downloads_directory }}/ppviewer/CONSOLA*.TTF

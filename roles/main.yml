@@ -1,0 +1,5 @@
+---
+- name: Install PopClip
+  community.general.mas:
+    id: 445189367
+    state: present

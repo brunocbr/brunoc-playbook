@@ -1,0 +1,24 @@
+---
+- name: Download BusyCal DMG
+  get_url:
+    url: "https://www.busymac.com/download/bcl-2022.2.3-2022-09-22-10-11.dmg.zip"
+    dest: "/tmp/BusyCal.dmg"
+- name: Mount DMG
+  command: "hdiutil attach /tmp/BusyCal.dmg"
+  register: mounted_dmg
+  changed_when: false
+
+- name: Copy to Applications
+  become: yes
+  command: "cp -R '/Volumes/BusyCal/BusyCal.app' '/Applications/'"
+  when: mounted_dmg is succeeded
+
+- name: Unmount DMG
+  command: "hdiutil detach '/Volumes/BusyCal'"
+  when: mounted_dmg is succeeded
+
+- name: Remove downloaded DMG
+  file:
+    path: "/tmp/BusyCal.dmg"
+    state: absent
+

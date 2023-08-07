@@ -1,0 +1,5 @@
+---
+- name: Install Agenda
+  community.general.mas:
+    id: 1287445660
+    state: present
