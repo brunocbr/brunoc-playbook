@@ -1,0 +1,8 @@
+---
+- name: Tap cask-fonts
+  homebrew_tap:
+    name: homebrew/cask-fonts
+- name: Install Iosevka Font
+  homebrew_cask:
+    name: font-iosevka
+    state: latest

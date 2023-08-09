@@ -157,6 +157,9 @@
     - role: font-source-code-pro
       tags: [editors, font-source-code-pro]
 
+    - role: font-iosevka
+      tags: [editors, font-iosevka]
+
     - role: spacemacs
       tags: [macos, spacemacs]
       vars:
