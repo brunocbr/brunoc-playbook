@@ -1,0 +1,27 @@
+---
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download Microsoft Teams Package
+  get_url:
+    url: "https://go.microsoft.com/fwlink/p/?linkid=869428&lm=deeplink&lmsrc=groupChatMarketingPageWeb&cmpid=directDownloadMac&clcid=0x409&culture=en-us&country=us"
+    dest: "{{ temp_dir.path }}/Teams_osx.pkg"
+
+- name: Install Microsoft Teams Package
+  become: yes
+  shell: "installer -pkg {{ temp_dir.path }}/Teams_osx.pkg -target /"
+  register: install_result
+
+- name: Verify installation success
+  fail:
+    msg: "Failed to install Microsoft Teams"
+  when: install_result.rc != 0
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent
+
+

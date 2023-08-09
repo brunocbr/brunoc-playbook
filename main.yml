@@ -100,8 +100,6 @@
     - role: google-drive
       tags: [desktop-applications, brew-cask-pkg]
 
-    
-
     - role: app-alfred
       tags: [desktop-applications, app-alfred, brew-cask-pkg]
 
@@ -201,6 +199,9 @@
 
     - role: microsoft-365
       tags: [macos, microsoft-365]
+
+    - role: ms-teams
+      tags: [macos, ms-teams, pkg-installer]
 
       # não funciona no Catalina
     - role: ia-duospace

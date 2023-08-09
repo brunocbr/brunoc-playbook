@@ -1,37 +1,37 @@
 ---
-- name: Create a temporary directory
-  tempfile:
-    state: directory
-  register: temp_dir
+# - name: Create a temporary directory
+#   tempfile:
+#     state: directory
+#   register: temp_dir
 
-- name: Create iA Writer Fonts directory
-  file:
-    path: "{{ home_directory }}/Library/Fonts/iA Writer Fonts"
-    state: directory
-    owner: brunoc
-    group: staff
+# - name: Create iA Writer Fonts directory
+#   file:
+#     path: "{{ home_directory }}/Library/Fonts/iA Writer Fonts"
+#     state: directory
+#     owner: brunoc
+#     group: staff
 
-- name: Download iA Writer Duo V Italic
-  get_url:
-    url: "https://github.com/iaolo/iA-Fonts/blob/master/iA%20Writer%20Duo/Variable/iAWriterDuoV-Italic.ttf"
-    dest: "{{ temp_dir.path }}"
+# - name: Download iA Writer Duo V Italic
+#   get_url:
+#     url: "https://github.com/iaolo/iA-Fonts/blob/master/iA%20Writer%20Duo/Variable/iAWriterDuoV-Italic.ttf"
+#     dest: "{{ temp_dir.path }}"
 
-- name: Download iA Writer Duo V
-  get_url:
-    url: "https://github.com/iaolo/iA-Fonts/blob/master/iA%20Writer%20Duo/Variable/iAWriterDuoV.ttf"
-    dest: "{{ temp_dir.path }}"
+# - name: Download iA Writer Duo V
+#   get_url:
+#     url: "https://github.com/iaolo/iA-Fonts/blob/master/iA%20Writer%20Duo/Variable/iAWriterDuoV.ttf"
+#     dest: "{{ temp_dir.path }}"
 
-- name: Copy iA Writer Duo Fonts to Fonts directory
-  copy:
-    src: "{{ temp_dir.path }}/"
-    dest: "{{ home_directory }}/Library/Fonts/iA Writer Fonts/"
-    mode: '0644'
-  become: true
-- name: Clean up temporary files
-  file:
-    path: "{{ temp_dir.path }}"
-    state: absent
-  register: cleanup_result
+# - name: Copy iA Writer Duo Fonts to Fonts directory
+#   copy:
+#     src: "{{ temp_dir.path }}/"
+#     dest: "{{ home_directory }}/Library/Fonts/iA Writer Fonts/"
+#     mode: '0644'
+#   become: true
+# - name: Clean up temporary files
+#   file:
+#     path: "{{ temp_dir.path }}"
+#     state: absent
+#   register: cleanup_result
 
 # - name: Verify cleanup successful
 #   fail:
@@ -39,10 +39,10 @@
 #   when: cleanup_result.failed
 
 
-# - name: Add cask-fonts tap
-#   command: brew tap homebrew/cask-fonts
+- name: Add cask-fonts tap
+  command: brew tap homebrew/cask-fonts
 
-# - name: Install iA Writer Duospace
-#   homebrew_cask:
-#     name: font-ia-writer-duospace
-#     state: latest
+- name: Install iA Writer Duospace
+  homebrew_cask:
+    name: font-ia-writer-duospace
+    state: latest
