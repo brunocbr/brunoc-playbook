@@ -1,0 +1,5 @@
+---
+- name: Install TeX Live
+  homebrew:
+    name: texlive
+    state: latest

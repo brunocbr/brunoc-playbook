@@ -196,6 +196,8 @@
     - role: mosh
       tags: [shell, brew-pkg, mosh]
 
+    - role: texlive
+      tags: [writing, brew-pkg, texlive]
 
     - role: microsoft-365
       tags: [macos, microsoft-365]
