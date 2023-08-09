@@ -1,0 +1,17 @@
+---
+#- name: Install Bitwarden from App Store
+#  community.general.mas:
+#    id: 1352778147
+#    state: present
+
+# - name: Install Bitwarden CLI from Homebrew
+#   homebrew_cask:
+#     name: bitwarden-cli
+#     state: latest
+
+- name: Install Bitwarden CLI from NPM
+  npm:
+    name: "@bitwarden/cli"
+    global: true
+  become: true
+

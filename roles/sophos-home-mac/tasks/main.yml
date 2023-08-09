@@ -6,7 +6,7 @@
 
 - name: Download Sophos Home ZIP
   get_url:
-    url: "https://dzr-api-amzn-us-east-1-h0m3.api-upe.p.hmr.sophos.com/api/download/ba7daee7dde3f93b666ed0600bf4838c/SophosInstall.zip"
+    url: "https://dzr-api-amzn-us-east-1-h0m3.api-upe.p.hmr.sophos.com/api/download/XXXXXX/SophosInstall.zip"
     dest: "{{ temp_dir.path }}/SophosInstall.zip"
 
 - name: Unzip Sophos Home

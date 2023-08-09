@@ -1,6 +1,12 @@
 ---
 - hosts: localhost
   connection: local
+  vars_prompt:
+    - name: git_user
+      private: no
+    - name: git_pass
+      private: yes
+
   roles:
     #############################################################################
     # Foundational ##############################################################
@@ -61,7 +67,13 @@
       vars:
         # https://nodejs.org/dist/
         # https://github.com/nodejs/node/releases
-        node_version: "18.12.1"
+        node_version: "18.17.0"
+
+    - role: gulp
+      tags: [npm-pkg, gulp]
+      vars:
+        gulp_version: "4.0.2"
+
 
 #    - role: maven
 #      tags: [foundational, package-and-build, brew-pkg, maven]
@@ -88,6 +100,8 @@
     - role: google-drive
       tags: [desktop-applications, brew-cask-pkg]
 
+    
+
     - role: app-alfred
       tags: [desktop-applications, app-alfred, brew-cask-pkg]
 
@@ -99,6 +113,11 @@
 
     - role: seafile-client-mac
       tags: [desktop-applications, macos, pkg-installer, seafile-client]
+
+
+      ## TODO: Hazel + license
+
+      ## LINKS phi alpha...
 
     - role: tailscale-mac
       tags: [vpn, macos, tailscale]
@@ -130,6 +149,9 @@
     - role: popclip
       tags: [macos, popclip, mac-tools]
 
+    - role: bitwarden-cli
+      tags: [security, bitwarden-cli]
+
 
     - role: font-source-code-pro
       tags: [editors, font-source-code-pro]
@@ -155,11 +177,11 @@
     - role: zsh
       tags: [shell, brew-pkg, zsh]
 
-    - role: fish
-      tags: [shell, brew-pkg, fish]
+    # - role: fish
+    #   tags: [shell, brew-pkg, fish]
 
-    - role: fish-foreign-env
-      tags: [shell, bespoke-pkg, fish, fish-foreign-env]
+    # - role: fish-foreign-env
+    #   tags: [shell, bespoke-pkg, fish, fish-foreign-env]
 
     - role: iterm
       tags: [shell, brew-cask-pkg, iterm]
@@ -170,10 +192,26 @@
     - role: tmuxinator
       tags: [shell, gem-pkg, tmux, tmuxinator]
 
-
+    - role: mosh
+      tags: [shell, brew-pkg, mosh]
 
 
     - role: microsoft-365
       tags: [macos, microsoft-365]
 
-  
+      # não funciona no Catalina
+    - role: ia-duospace
+      tags: [fonts, ia-duospace]
+
+    - role: git-with-creds
+      vars:
+        repo_name: bibs
+      tags: [git-pvt-repo, bibs]
+
+    - role: git-with-creds
+      vars:
+        repo_name: zettel-composer
+      tags: [git-pvt-repo, zettel-composer]
+
+    - role: revealjs
+      tags: [git-repo, teaching, revealjs]

@@ -1,0 +1,9 @@
+---
+- git:
+    repo: "https://{{git_user|urlencode()}}:{{git_pass|urlencode()}}@github.com/brunocbr/{{repo_name}}"
+    dest: "{{home_dir}}/src/{{repo_name}}"
+    update: yes
+- name: remove visibility of credentials
+  command:
+    cmd: git remote set-url origin https://github.com/brunocbr/{{repo_name}}.git
+    chdir: "{{home_dir}}/src/{{repo_name}}"

@@ -1,0 +1,6 @@
+---
+- name: Install mosh
+  homebrew:
+    name: mosh
+    state: latest
+

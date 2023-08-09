@@ -1,0 +1,17 @@
+---
+- git:
+    repo: "https://github.com/hakimel/reveal.js.git"
+    dest: "{{home_dir}}/src/reveal.js"
+    update: yes
+- name: Install Reveal.JS
+  command:
+    cmd: npm install
+    chdir: "{{home_dir}}/src/reveal.js"
+
+# - name: Install RevealJS
+#   npm:
+#     name: reveal.js
+#     global: no
+#     path: /Users/brunoc/src/revealjs
+#   become: no
+
