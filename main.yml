@@ -130,7 +130,7 @@
       tags: [configuration, bespoke-pkg, better-touch-tool, uses-secrets]
       vars:
         # https://folivora.ai/releases
-        better_touch_tool_version: "2.667" # using latest
+        better_touch_tool_version: "2.667" # versão licenciada não está mais no site
 
 #    - role: gnu-tar-catalina
 #      tags: [foundational, gnu-tar-catalina]

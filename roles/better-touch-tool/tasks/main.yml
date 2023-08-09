@@ -1,7 +1,7 @@
 ---
 - name: Download BetterTouchTool
   get_url: >
-    url="https://folivora.ai/releases/BetterTouchTool.zip"
+    url="https://folivora.ai/releases/btt{{ better_touch_tool_version }}.zip"
     dest="{{ downloads_directory }}/BetterTouchTool.zip"
 
 - name: Extract BetterTouchTool zip archive
