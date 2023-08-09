@@ -1,0 +1,29 @@
+---
+- name: Create temporary dir
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download Marked DMG
+  get_url:
+    url: "https://cdn2.marked2app.com/download/Marked.dmg"
+    dest: "{{ temp_dir.path }}/Marked.dmg"
+
+- name: Mount DMG
+  command: "hdiutil attach {{ temp_dir.path }}/Marked.dmg"
+  register: mounted_dmg
+  changed_when: false
+
+- name: Copy to Applications
+  become: yes
+  command: "cp -R '/Volumes/Marked 2/Marked 2.app' '/Applications/'"
+  when: mounted_dmg is succeeded
+
+- name: Unmount DMG
+  command: "hdiutil detach '/Volumes/Marked 2'"
+  when: mounted_dmg is succeeded
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent

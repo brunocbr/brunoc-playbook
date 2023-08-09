@@ -149,6 +149,9 @@
     - role: popclip
       tags: [macos, popclip, mac-tools]
 
+    - role: marked
+      tags: [macos, mac-tools, writing, marked]
+
     - role: bitwarden-cli
       tags: [security, bitwarden-cli]
 
