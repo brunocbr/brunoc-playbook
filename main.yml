@@ -216,5 +216,13 @@
         repo_name: zettel-composer
       tags: [git-pvt-repo, zettel-composer]
 
+    - role: git-with-creds
+      vars:
+        repo_name: profile
+      tags: [git-pvt-repo, profile-src, profile]
+
+    - role: profile-links
+      tags: [git-pvt-repo, profile-links, profile]
+
     - role: revealjs
       tags: [git-repo, teaching, revealjs]
