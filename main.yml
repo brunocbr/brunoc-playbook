@@ -238,3 +238,8 @@
 
     - role: tlg
       tags: [tlg]
+
+    - role: diogenes
+      tags: [diogenes]
+
+      

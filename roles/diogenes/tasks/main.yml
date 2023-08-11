@@ -1,0 +1,48 @@
+---
+- uri:
+    url: https://api.github.com/repos/pjheslin/diogenes/releases/latest
+    return_content: true
+  register: ghinfo
+
+- name: debug info
+  debug:
+    msg: "arch: {{ ansible_os_family }} {{ ansible_architecture }}"
+
+- name: more debug
+  debug:
+    msg: "tag-name: {{ ghinfo.json.tag_name }}"
+
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download Diogenes for Intel 64-bits Mac
+  get_url:
+    url: "https://github.com/pjheslin/diogenes/releases/download/{{ ghinfo.json.tag_name }}/diogenes-mac-x64-{{ ghinfo.json.tag_name }}.zip"
+    dest: "{{ temp_dir.path }}/diogenes-mac.zip"
+  when: ansible_facts['os_family'] == "Darwin" and ansible_facts['architecture'] == "x86_64"
+
+- name: Download Diogenes for Apple Silicon 64-bits Mac
+  get_url:
+    url: "https://github.com/pjheslin/diogenes/releases/download/{{ ghinfo.json.tag_name }}/diogenes-mac-arm64-{{ ghinfo.json.tag_name }}.zip"
+    dest: "{{ temp_dir.path }}/diogenes-mac.zip"
+  when: ansible_facts['os_family'] == "Darwin" and ansible_facts['architecture'] == "arm64"
+
+- name: Unzip Diogenes for Mac archive
+  unarchive:
+    src: "{{ temp_dir.path }}/diogenes-mac.zip"
+    dest: "{{ temp_dir.path }}"
+    remote_src: yes
+  register: unzip_result
+  when: ansible_facts['os_family'] == "Darwin"
+
+- name: Copy to Applications
+  become: yes
+  command: "cp -R '{{ temp_dir.path }}/Diogenes.app' '/Applications/'"
+  when: ansible_facts['os_family'] == "Darwin" and unzip_result is succeeded
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent
