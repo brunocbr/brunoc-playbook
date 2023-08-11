@@ -199,6 +199,9 @@
     - role: mosh
       tags: [shell, brew-pkg, mosh]
 
+    - role: pandoc
+      tags: [brew-pkg, writing, pandoc]
+
     - role: texlive
       tags: [writing, brew-pkg, texlive]
 
@@ -232,3 +235,6 @@
 
     - role: revealjs
       tags: [git-repo, teaching, revealjs]
+
+    - role: tlg
+      tags: [tlg]

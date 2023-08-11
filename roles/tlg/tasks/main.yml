@@ -1,0 +1,48 @@
+---
+- name: Mount network share
+  mount:
+    src: //{{ nas_user }}:{{ nas_pass }}@{{ nas_host }}/home
+    name: /Volumes/nas_home
+    opts: soft
+    fstype: smbfs
+    state: mounted
+  become: true
+
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Copy TLG archive from network share
+  copy:
+    src: /Volumes/nas_home/Installation/TLG-data.zip
+    dest: "{{ temp_dir.path }}"
+    owner: "{{ ansible_user_id }}"
+    remote_src: yes
+  become: true
+
+- name: Create TLG directory
+  file:
+    path: /usr/local/share/tlg
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    mode: '0755'
+
+- name: Unarchive TLG
+  unarchive:
+    src: "{{ temp_dir.path }}/TLG-data.zip"
+    dest: /usr/local/share/tlg
+    owner: "{{ ansible_user_id }}"
+    remote_src: yes
+  become: true
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent
+
+- name: Unmount network share
+  mount:
+    path: /Volumes/nas_home
+    state: absent
+  become: true

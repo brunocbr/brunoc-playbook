@@ -1,0 +1,10 @@
+---
+- name: Install Cabal and Hackage CLI
+  homebrew:
+    name: cabal-install
+    state: latest
+
+- name: Install pandoc
+  homebrew:
+    name: pandoc
+    state: latest
