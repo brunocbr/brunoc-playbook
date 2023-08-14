@@ -144,6 +144,9 @@
     - role: toggl-cli
       tags: [pip-pkg, planning, toggl-cli]
 
+    - role: be-focused
+      tags: [pkg-installer, planning, be-focused]
+
     - role: mindnode
       tags: [macos, mindnode]
 
