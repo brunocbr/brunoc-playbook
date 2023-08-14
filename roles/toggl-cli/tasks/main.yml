@@ -1,0 +1,4 @@
+---
+- name: Install Toggl CLI
+  command:
+    cmd: pip3 install togglCli

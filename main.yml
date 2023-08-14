@@ -136,10 +136,13 @@
 #      tags: [foundational, gnu-tar-catalina]
 
     - role: busycal
-      tags: [macos, busycal]
+      tags: [macos, planning, busycal]
 
     - role: app-agenda
-      tags: [macos, app-agenda]
+      tags: [macos, planning, app-agenda]
+
+    - role: toggl-cli
+      tags: [pip-pkg, planning, toggl-cli]
 
     - role: mindnode
       tags: [macos, mindnode]
@@ -242,4 +245,4 @@
     - role: diogenes
       tags: [diogenes]
 
-      
+
