@@ -78,11 +78,21 @@
 #    - role: maven
 #      tags: [foundational, package-and-build, brew-pkg, maven]
 
-    - role: emacs-pre-built
-      tags: [text-editors, bespoke-pkg, emacs-pre-built]
-      vars:
-        emacs_pre_built_version: "29.1"
-        emacs_pre_built_patch: ""
+#    - role: gnu-tar-catalina
+#      tags: [foundational, gnu-tar-catalina]
+
+      ############
+      # My Cloud #
+      ############
+
+    - role: tailscale-mac
+      tags: [vpn, macos, tailscale]
+
+    - role: seafile-client-mac
+      tags: [desktop-applications, macos, pkg-installer, seafile-client]
+
+      ## TODO: Hazel + license
+      ## TODO: config & links phi alpha...
 
     #############################################################################
     # Fonts #####################################################################
@@ -94,6 +104,20 @@
     - role: consolas
       tags: [fonts, bespoke-pkg, consolas]
 
+    - role: font-source-code-pro
+      tags: [editors, font-source-code-pro]
+
+    - role: font-iosevka
+      tags: [editors, font-iosevka]
+
+    # não funciona no Catalina
+    - role: ia-duospace
+      tags: [fonts, ia-duospace]
+
+    ###################
+    # Browser & Tools #
+    ###################
+
     - role: google-chrome
       tags: [desktop-applications, brew-cask-pkg, google-chrome]
 
@@ -103,28 +127,8 @@
     - role: app-alfred
       tags: [desktop-applications, app-alfred, brew-cask-pkg]
 
-    - role: app-airmail
-      tags: [desktop-applications, macos, brew-cask-pkg, airmail]
-
     - role: app-keyboard-maestro
       tags: [desktop-applications, macos, brew-cask-pkg, keyboard-maestro]
-
-    - role: seafile-client-mac
-      tags: [desktop-applications, macos, pkg-installer, seafile-client]
-
-
-      ## TODO: Hazel + license
-
-      ## LINKS phi alpha...
-
-    - role: tailscale-mac
-      tags: [vpn, macos, tailscale]
-
-    - role: mas
-      tags: [macos, foundational, mas]
-
-#    - role: devonthink
-#      tags: [macos, desktop-applications, devonthink]
 
     - role: better-touch-tool
       tags: [configuration, bespoke-pkg, better-touch-tool, uses-secrets]
@@ -132,48 +136,71 @@
         # https://folivora.ai/releases
         better_touch_tool_version: "2.667" # versão licenciada não está mais no site
 
-#    - role: gnu-tar-catalina
-#      tags: [foundational, gnu-tar-catalina]
-
-    - role: busycal
-      tags: [macos, planning, busycal]
-
-    - role: app-agenda
-      tags: [macos, planning, app-agenda]
-
-    - role: toggl-cli
-      tags: [pip-pkg, planning, toggl-cli]
-
-    - role: be-focused
-      tags: [pkg-installer, planning, be-focused]
-
-    - role: mindnode
-      tags: [macos, mindnode]
-
-    - role: popclip
-      tags: [macos, popclip, mac-tools]
-
-    - role: marked
-      tags: [macos, mac-tools, writing, marked]
-
     - role: bitwarden-cli
       tags: [security, bitwarden-cli]
 
+#    - role: sophos-home-mac
+#      tags: [macos, sophos-home-mac]
 
-    - role: font-source-code-pro
-      tags: [editors, font-source-code-pro]
 
-    - role: font-iosevka
-      tags: [editors, font-iosevka]
+    ########################
+    # Writing and Teaching #
+    ########################
+
+    - role: emacs-pre-built
+      tags: [text-editors, bespoke-pkg, emacs-pre-built]
+      vars:
+        emacs_pre_built_version: "29.1"
+        emacs_pre_built_patch: ""
 
     - role: spacemacs
-      tags: [macos, spacemacs]
+      tags: [macos, spacemacs, writing]
       vars:
         users:
           - username: brunoc
 
-#    - role: sophos-home-mac
-#      tags: [macos, sophos-home-mac]
+    - role: pandoc
+      tags: [brew-pkg, writing, pandoc]
+
+    - role: texlive
+      tags: [writing, brew-pkg, texlive]
+
+    - role: popclip
+      tags: [macos, writing, popclip, mac-tools]
+
+    - role: marked
+      tags: [macos, mac-tools, writing, marked]
+
+    - role: revealjs
+      tags: [git-repo, teaching, revealjs]
+
+    - role: tlg
+      tags: [tlg, writing]
+
+    - role: diogenes
+      tags: [diogenes, writing]
+
+    ################
+    # My git stuff #
+    ################
+
+    - role: git-with-creds
+      vars:
+        repo_name: bibs
+      tags: [git-pvt-repo, bibs]
+
+    - role: git-with-creds
+      vars:
+        repo_name: zettel-composer
+      tags: [git-pvt-repo, zettel-composer]
+
+    - role: git-with-creds
+      vars:
+        repo_name: profile
+      tags: [git-pvt-repo, profile-src, profile]
+
+    - role: profile-links
+      tags: [git-pvt-repo, profile-links, profile]
 
 
 
@@ -205,11 +232,37 @@
     - role: mosh
       tags: [shell, brew-pkg, mosh]
 
-    - role: pandoc
-      tags: [brew-pkg, writing, pandoc]
+    #####################
+    # Productivity Apps #
+    #####################
 
-    - role: texlive
-      tags: [writing, brew-pkg, texlive]
+    - role: app-airmail
+      tags: [desktop-applications, macos, brew-cask-pkg, airmail]
+
+    - role: mas
+      tags: [macos, foundational, mas]
+
+#    - role: devonthink
+#      tags: [macos, desktop-applications, devonthink]
+
+    - role: busycal
+      tags: [macos, planning, busycal]
+
+    - role: app-agenda
+      tags: [macos, planning, app-agenda]
+
+    - role: toggl-cli
+      tags: [pip-pkg, planning, toggl-cli]
+
+    - role: be-focused
+      tags: [pkg-installer, planning, be-focused]
+
+    - role: mindnode
+      tags: [macos, mindnode]
+
+    ###################
+    # Microsoft Stuff #
+    ###################
 
     - role: microsoft-365
       tags: [macos, microsoft-365]
@@ -217,50 +270,17 @@
     - role: ms-teams
       tags: [macos, ms-teams, pkg-installer]
 
-      # não funciona no Catalina
-    - role: ia-duospace
-      tags: [fonts, ia-duospace]
-
-    - role: git-with-creds
-      vars:
-        repo_name: bibs
-      tags: [git-pvt-repo, bibs]
-
-    - role: git-with-creds
-      vars:
-        repo_name: zettel-composer
-      tags: [git-pvt-repo, zettel-composer]
-
-    - role: git-with-creds
-      vars:
-        repo_name: profile
-      tags: [git-pvt-repo, profile-src, profile]
-
-    - role: profile-links
-      tags: [git-pvt-repo, profile-links, profile]
-
-    - role: revealjs
-      tags: [git-repo, teaching, revealjs]
-
-    - role: tlg
-      tags: [tlg]
-
-    - role: diogenes
-      tags: [diogenes]
-
-    ########################################################################
-
-    - role: ms-rdp
-      tags: [remote, network, pucsp, ms-rdp]
+    #################
+    # Remote Access #
+    #################
 
     - role: tunnelblick
       tags: [network, pucsp, tunnelblick]
 
+    - role: ms-rdp
+      tags: [remote, network, pucsp, ms-rdp]
+
     - role: ovpn-pucsp
       tags: [pucsp, ovpn-pucsp]
-
-
-
-
 
 
