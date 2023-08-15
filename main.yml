@@ -248,11 +248,19 @@
     - role: diogenes
       tags: [diogenes]
 
+    ########################################################################
+
     - role: ms-rdp
       tags: [remote, network, pucsp, ms-rdp]
 
     - role: tunnelblick
-      tags: [network, tunnelblick]
-  
+      tags: [network, pucsp, tunnelblick]
+
+    - role: ovpn-pucsp
+      tags: [pucsp, ovpn-pucsp]
+
+
+
+
 
 

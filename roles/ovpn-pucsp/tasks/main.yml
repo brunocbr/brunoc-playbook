@@ -1,0 +1,28 @@
+---
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download PUC VPN ZIP
+  get_url:
+    url: "http://www4.pucsp.br/downloads/vpn/vpnpuc_mac.zip"
+    dest: "{{ temp_dir.path }}"
+
+- name: Unzip PUC VPN ZIP
+  unarchive:
+    src: "{{ temp_dir.path }}/vpnpuc_mac.zip"
+    dest: "{{ temp_dir.path }}"
+    remote_src: yes
+  register: unzip_result
+
+- name: Install OVPN configuration with Tunnelblick
+  command: "open -a '/Applications/Tunnelblick.app' '{{ temp_dir.path}}/{{ item }}'"
+  with_items:
+    - vpnpuc_mac/vpn-udp-1195-ios.ovpn
+  when: unzip_result is succeeded
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent
