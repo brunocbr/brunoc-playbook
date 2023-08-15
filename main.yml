@@ -248,4 +248,7 @@
     - role: diogenes
       tags: [diogenes]
 
+    - role: ms-rdp
+      tags: [remote, pucsp, ms-rdp]
+
 

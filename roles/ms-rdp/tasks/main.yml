@@ -1,0 +1,5 @@
+---
+- name: Install Microsoft Remote Desktop
+  community.general.mas:
+    id: 1295203466
+    state: present
