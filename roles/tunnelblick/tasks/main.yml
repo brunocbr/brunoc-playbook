@@ -1,0 +1,30 @@
+---
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download Tunnelblick DMG
+  get_url:
+    url: "https://tunnelblick.net/iprelease/Latest_Tunnelblick_Stable.dmg"
+    dest: "{{ temp_dir.path }}/tunnelblick.dmg"
+
+- name: Mount Tunnelblick DMG
+  command: "hdiutil attach {{ temp_dir.path }}/tunnelblick.dmg"
+  register: mounted_dmg
+  changed_when: false
+
+- name: Copy Tunnelblick to Applications
+  become: yes
+  command: "cp -R '/Volumes/Tunnelblick/Tunnelblick.app' '/Applications/'"
+  when: mounted_dmg is succeeded
+
+
+- name: Unmount Tunnelblick DMG
+  command: "hdiutil detach '/Volumes/Tunnelblick'"
+  when: mounted_dmg is succeeded
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent
