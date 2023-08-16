@@ -1,0 +1,7 @@
+---
+- name: Install Toggl Track for MacOS
+  mas:
+    id: 1291898086
+    state: present
+  when: ansible_facts['os_family'] == "Darwin"
+

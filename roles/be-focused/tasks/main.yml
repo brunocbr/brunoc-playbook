@@ -1,0 +1,5 @@
+---
+- name: Install Be Focused Pro
+  community.general.mas:
+    id: 961632517
+    state: present

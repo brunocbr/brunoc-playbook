@@ -254,6 +254,9 @@
     - role: toggl-cli
       tags: [pip-pkg, planning, toggl-cli]
 
+    - role: toggl
+      tags: [desktop-applications, macos, toggl]
+
     - role: be-focused
       tags: [pkg-installer, planning, be-focused]
 
