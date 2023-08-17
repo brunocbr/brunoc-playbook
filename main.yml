@@ -160,7 +160,9 @@
           - username: brunoc
 
     - role: pandoc
-      tags: [brew-pkg, writing, pandoc]
+      vars:
+        pandoc_version: 3.1.6.1
+      tags: [bespoke-pkg, writing, pandoc]
 
     - role: texlive
       tags: [writing, brew-pkg, texlive]

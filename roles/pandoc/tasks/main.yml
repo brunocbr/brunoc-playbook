@@ -1,10 +1,22 @@
 ---
-- name: Install Cabal and Hackage CLI
-  homebrew:
-    name: cabal-install
-    state: latest
+# - name: Install Cabal and Hackage CLI
+#   homebrew:
+#     name: cabal-install
+#     state: latest
 
-- name: Install pandoc
-  homebrew:
-    name: pandoc
-    state: latest
+# - name: Install pandoc
+#   homebrew:
+#     name: pandoc
+#     state: latest
+
+- name: Download pandoc pkg
+  get_url:
+    url: https://github.com/jgm/pandoc/releases/download/{{ pandoc_version }}/pandoc-{{ pandoc_version }}-x86_64-macOS.pkg
+    dest: "{{ downloads_directory }}/pandoc-macOS.pkg"
+
+
+- name: Install pandoc binaries
+  command: >
+    installer -package {{ downloads_directory }}/pandoc-macOS.pkg -target /
+  become: yes
+
