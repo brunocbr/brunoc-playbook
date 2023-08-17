@@ -182,6 +182,16 @@
     - role: diogenes
       tags: [diogenes, writing]
 
+    - role: automator-apps
+      vars:
+        app_list:
+          - ZettelCompose - Browse
+          - ZettelCompose - Handout
+          - ZettelCompose to docx
+          - ZettelCompose
+          - ZettelComposer - com grego
+      tags: [macos, writing, zettel-compose-apps]
+
     ################
     # My git stuff #
     ################

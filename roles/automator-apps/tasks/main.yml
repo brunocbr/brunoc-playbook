@@ -1,0 +1,29 @@
+- name: Mount network share
+  mount:
+    src: //{{ nas_user }}:{{ nas_pass }}@{{ nas_host }}/home
+    name: /Volumes/nas_home
+    opts: soft
+    fstype: smbfs
+    state: mounted
+  become: true
+
+- name: "Copy PKGs"
+  copy:
+    src: "/Volumes/nas_home/Installation/Automator Apps/{{ item }}.pkg"
+    dest: "{{ downloads_directory }}"
+    owner: "{{ ansible_user_id }}"
+    remote_src: yes
+  become: true
+  loop: "{{ app_list }}"
+
+- name: "Install Automator Apps"
+  command: >
+    installer -package "{{ downloads_directory }}/{{ item }}.pkg" -target /
+  become: yes
+  loop: "{{ app_list }}"
+
+- name: Unmount network share
+  mount:
+    path: /Volumes/nas_home
+    state: absent
+  become: true
