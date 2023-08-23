@@ -1,0 +1,26 @@
+---
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download Screens 4 from Edovia download link
+  get_url:
+    url: https://edovia.com/scripts/download.php?bundleID=com.edovia.screens4.mac&code=DIR
+    dest: "{{ temp_dir.path }}/Screens 4.zip"
+
+- name: Unzip Screens 4 archive
+  unarchive:
+    src: "{{ temp_dir.path }}/Screens 4.zip"
+    dest: "{{ temp_dir.path }}"
+    remote_src: yes
+  register: unzip_result
+
+- name: Copy to Applications
+  become: yes
+  command: "cp -R '{{ temp_dir.path }}/Screens 4.app' '/Applications/'"
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent

@@ -293,9 +293,12 @@
       tags: [network, pucsp, tunnelblick]
 
     - role: ms-rdp
-      tags: [remote, network, pucsp, ms-rdp]
+      tags: [remote, network, pucsp, macos, ms-rdp]
 
     - role: ovpn-pucsp
       tags: [pucsp, ovpn-pucsp]
+
+    - role: screens
+      tags: [screens, macos]
 
 
