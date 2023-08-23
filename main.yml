@@ -244,6 +244,9 @@
     - role: mosh
       tags: [shell, brew-pkg, mosh]
 
+    - role: ripgrep
+      tags: [shell, brew-pkg, ripgrep]
+
     #####################
     # Productivity Apps #
     #####################
@@ -293,9 +296,12 @@
       tags: [network, pucsp, tunnelblick]
 
     - role: ms-rdp
-      tags: [remote, network, pucsp, ms-rdp]
+      tags: [remote, network, pucsp, macos, ms-rdp]
 
     - role: ovpn-pucsp
       tags: [pucsp, ovpn-pucsp]
+
+    - role: screens
+      tags: [screens, macos]
 
 
