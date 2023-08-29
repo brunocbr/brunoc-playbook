@@ -170,6 +170,9 @@
     - role: basictex
       tags: [macos, writing, brew-pkg, basictex]
 
+    - role: latex-packages
+      tags: [writing, latex-packages]
+
     - role: popclip
       tags: [macos, writing, popclip, mac-tools]
 

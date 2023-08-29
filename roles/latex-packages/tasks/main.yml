@@ -1,0 +1,7 @@
+---
+- name: install LaTeX packages  # noqa risky-shell-pipe
+  become: true
+  ansible.builtin.shell: >
+    tlmgr update --self &&
+    tlmgr update --list &&
+    tlmgr install {{ ' '.join(latex_packages) }}
