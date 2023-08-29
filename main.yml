@@ -114,6 +114,9 @@
     - role: ia-duospace
       tags: [fonts, ia-duospace]
 
+    - role: font-eb-garamond
+      tags: [fonts, font-eb-garamond]
+
     ###################
     # Browser & Tools #
     ###################
