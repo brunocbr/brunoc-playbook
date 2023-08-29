@@ -1,0 +1,5 @@
+---
+- name: Install Basic TeX
+  homebrew_cask:
+    name: basictex
+    state: latest

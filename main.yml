@@ -164,8 +164,11 @@
         pandoc_version: 3.1.6.1
       tags: [bespoke-pkg, writing, pandoc]
 
-    - role: texlive
-      tags: [writing, brew-pkg, texlive]
+    # - role: texlive
+    #   tags: [writing, brew-pkg, texlive]
+
+    - role: basictex
+      tags: [macos, writing, brew-pkg, basictex]
 
     - role: popclip
       tags: [macos, writing, popclip, mac-tools]
