@@ -256,6 +256,10 @@
     - role: ripgrep
       tags: [shell, brew-pkg, ripgrep]
 
+    - role: ffmpeg
+      tags: [shell, brew-pkg, ffmpeg]
+
+
     #####################
     # Productivity Apps #
     #####################
