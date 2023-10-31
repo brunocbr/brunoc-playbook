@@ -142,8 +142,12 @@
     - role: bitwarden-cli
       tags: [security, bitwarden-cli]
 
+    - role: doing
+      tags: [doing, gem-pkg]
+
 #    - role: sophos-home-mac
 #      tags: [macos, sophos-home-mac]
+
 
 
     ########################

@@ -1,0 +1,9 @@
+- name: Install rouge 3.30.0
+  gem:
+    name: rouge
+    version: 3.30.0
+
+- name: Install Brett Terpstra's doing
+  community.general.gem:
+    name: doing
+    state: latest
