@@ -1,0 +1,5 @@
+---
+- name: Install SWI Prolog
+  homebrew:
+    name: swi-prolog
+    state: latest

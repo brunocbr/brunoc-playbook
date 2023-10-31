@@ -223,6 +223,10 @@
     - role: profile-links
       tags: [git-pvt-repo, profile-links, profile]
 
+    ## Devel
+
+    - role: swi-prolog
+      tags: [devel, swi-prolog]
 
 
     #############################################################################
