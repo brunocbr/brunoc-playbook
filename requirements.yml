@@ -2,5 +2,6 @@
 collections:
   - name: ansible.posix
     version: 1.3.0
-- src: ayltai.macos_appstore
+
+# - src: ayltai.macos_appstore
 
