@@ -25,6 +25,12 @@
     path: /usr/local/share/swish/config-enabled
     state: directory
 
+- name: Configure data
+  file:
+    src: /usr/local/share/swish/config-available/data.pl
+    dest: /usr/local/share/swish/config-enabled/data.pl
+    state: link
+
 - name: Configure allow_remote
   file:
     src: /usr/local/share/swish/config-available/allow_remote.pl
