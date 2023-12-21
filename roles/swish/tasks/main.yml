@@ -1,0 +1,22 @@
+---
+- name: Clone SWISH repository
+  git:
+    repo: https://github.com/SWI-Prolog/swish.git
+    dest: /usr/local/share/swish
+    update: yes
+    recursive: yes
+
+- name: Install SWISH dependencies using npm
+  npm:
+    path: /usr/local/share/swish
+    global: yes
+
+- name: Install SWISH deopendencies with yarn
+  community.general.yarn:
+    path: /usr/local/share/swish
+
+- name: make src
+  command: make src
+  args:
+    chdir: /usr/local/share/swish
+

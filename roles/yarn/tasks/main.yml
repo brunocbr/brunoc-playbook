@@ -1,0 +1,9 @@
+---
+- name: Install yarn
+  become: yes
+  npm: >
+   name=yarn
+   state=present
+   global=yes
+   version={{ yarn_version }}
+
