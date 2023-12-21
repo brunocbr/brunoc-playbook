@@ -11,7 +11,7 @@
     path: /usr/local/share/swish
     global: yes
 
-- name: Install SWISH deopendencies with yarn
+- name: Install SWISH dependencies with yarn
   community.general.yarn:
     path: /usr/local/share/swish
 
@@ -20,3 +20,13 @@
   args:
     chdir: /usr/local/share/swish
 
+- name: Create enabled configuration path
+  file:
+    path: /usr/local/share/swish/config-enabled
+    state: directory
+
+- name: Configure allow_remote
+  file:
+    src: /usr/local/share/swish/config-available/allow_remote.pl
+    dest: /usr/local/share/swish/config-enabled/allow_remote.pl
+    state: link
