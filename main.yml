@@ -74,6 +74,11 @@
       vars:
         gulp_version: "4.0.2"
 
+    - role: yarn
+      tags: [npm-pkg, yarn]
+      vars:
+        yarn_version: "1.22.19"
+
 
 #    - role: maven
 #      tags: [foundational, package-and-build, brew-pkg, maven]
@@ -160,11 +165,11 @@
         emacs_pre_built_version: "29.1"
         emacs_pre_built_patch: ""
 
-    - role: spacemacs
-      tags: [macos, spacemacs, writing]
-      vars:
-        users:
-          - username: brunoc
+    # - role: spacemacs
+    #   tags: [macos, spacemacs, writing]
+    #   vars:
+    #     users:
+    #       - username: brunoc
 
     - role: pandoc
       vars:
@@ -232,6 +237,8 @@
     - role: swi-prolog
       tags: [devel, swi-prolog]
 
+    - role: swish
+      tags: [devel, swish]
 
     #############################################################################
     # Shell #####################################################################
