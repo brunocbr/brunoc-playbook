@@ -2,37 +2,53 @@
 - name: Clone SWISH repository
   git:
     repo: https://github.com/SWI-Prolog/swish.git
-    dest: /usr/local/share/swish
+    dest: "{{ swish_dir }}"
     update: yes
     recursive: yes
 
 - name: Install SWISH dependencies using npm
   npm:
-    path: /usr/local/share/swish
+    path: "{{ swish_dir }}"
     global: yes
 
 - name: Install SWISH dependencies with yarn
   community.general.yarn:
-    path: /usr/local/share/swish
+    path: "{{ swish_dir }}"
 
 - name: make src
   command: make src
   args:
-    chdir: /usr/local/share/swish
+    chdir: "{{ swish_dir }}"
 
 - name: Create enabled configuration path
   file:
-    path: /usr/local/share/swish/config-enabled
+    path: "{{ swish_dir }}/config-enabled"
     state: directory
 
 - name: Configure data
   file:
-    src: /usr/local/share/swish/config-available/data.pl
-    dest: /usr/local/share/swish/config-enabled/data.pl
+    src: "{{ swish_dir }}/config-available/data.pl"
+    dest: "{{ swish_dir }}/config-enabled/data.pl"
     state: link
 
 - name: Configure allow_remote
   file:
-    src: /usr/local/share/swish/config-available/allow_remote.pl
-    dest: /usr/local/share/swish/config-enabled/allow_remote.pl
+    src: "{{ swish_dir }}/config-available/allow_remote.pl"
+    dest: "{{ swish_dir }}/config-enabled/allow_remote.pl"
     state: link
+
+- name: Create prolog lib directory
+  file:
+    path: "{{ home_directory }}/.config/swi-prolog/lib"
+    owner: "{{ user }}"
+    recurse: yes
+
+- name: Configure IDE integration
+  template:
+    src: myswish.j2
+    dest: "{{ home_directory }}/.config/swi-prolog/lib/myswish.pl"
+
+- name: Make library index
+  command: swipl -g make_library_index('"{{ home_directory }}/.config/swi-prolog/lib"').
+  become: yes
+  become_user: "{{ user }}"
