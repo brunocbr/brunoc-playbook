@@ -1,0 +1,14 @@
+- name: Clone word-counter-app repository
+  ansible.builtin.git:
+    repo: https://github.com/brunocbr/word-counter-app.git
+    dest: "{{ target_dir }}"
+    clone: yes
+  become: true
+
+- name: Install dependencies
+  become: true
+  ansible.builtin.pip:
+    virtualenv: "{{ target_dir }}/venv"
+    virtualenv_command: python3 -m venv
+    requirements: "{{ target_dir }}/requirements.txt"
+

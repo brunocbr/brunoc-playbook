@@ -191,6 +191,11 @@
     - role: marked
       tags: [macos, mac-tools, writing, marked]
 
+    - role: word-counter
+      vars:
+        target_dir: /opt/local/share/word-counter-app
+      tags: [writing, word-counter]
+
     - role: revealjs
       tags: [git-repo, teaching, revealjs]
 
