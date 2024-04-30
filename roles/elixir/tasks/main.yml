@@ -1,5 +1,88 @@
 ---
-- name: Install Elixir
+- name: Elixir -- Verificar o sistema operacional
+  set_fact:
+    is_linux: "{{ 'linux' in ansible_distribution.lower() }}"
+    is_macos: "{{ 'darwin' in ansible_distribution.lower() }}"
+
+- name: Instalar dependências no Ubuntu
+  apt:
+    name: "{{ item }}"
+    state: present
+    loop:
+      - git
+      - curl
+      - build-essential
+      - autoconf
+      - m4
+      - libncurses5-dev
+      - libwxgtk3.0-gtk3-dev
+      - libgl1-mesa-dev
+      - libglu1-mesa-dev
+      - libpng-dev
+      - libssh-dev
+      - unixodbc-dev
+      - xsltproc
+      - fop
+  when: is_linux
+
+- name: Instalar dependências no macOS (via homebrew)
   homebrew:
-    name: elixir
-    state: latest
+    name: "{{ item }}"
+  loop:
+    - coreutils
+    - git
+    - curl
+    - autoconf
+    - wxmac
+    - libssh
+    - unixodbc
+    - fop
+    - libxslt
+    - libtool
+    - unzip
+    - libyaml
+  when: is_macos
+
+- name: Baixar o asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: ~/.asdf
+    version: v0.14.0
+
+- name: Adicionar asdf ao shell
+  lineinfile:
+    path: ~/.bashrc
+    line: "{{ item }}"
+  loop:
+    - ". $HOME/.asdf/asdf.sh"
+    - ". $HOME/.asdf/completions/asdf.bash"
+
+- name: Instalar plugin do Erlang no asdf
+  command: "/bin/bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git'"
+
+- name: Instalar plugin do Elixir no asdf
+  command: "/bin/bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin add elixir'"
+
+- name: Instalar Erlang 25.3.2.11
+  command: "/bin/bash -c 'source $HOME/.asdf/asdf.sh && asdf install erlang 25.3.2.11'"
+
+- name: Definir Erlang globalmente
+  command: "/bin/bash -c 'source $HOME/.asdf/asdf.sh && asdf global erlang 25.3.2.11'"
+
+- name: Instalar Elixir 1.16.2
+  command: "/bin/bash -c 'source $HOME/.asdf/asdf.sh && asdf install elixir 1.16.2'"
+
+- name: Definir Elixir globalmente
+  command: "/bin/bash -c 'source $HOME/.asdf/asdf.sh && asdf global elixir 1.16.2'"
+
+- name: Instalar ElixirLS
+  command: "/bin/bash -c 'source $HOME/.asdf/asdf.sh && mix local.hex --force && mix archive.install hex elixir_ls 0.20.0 --force'"
+
+- name: Verificar versões instaladas
+  command: "/bin/bash -c 'source $HOME/.asdf/asdf.sh && asdf current'"
+
+- name: Limpar cache do asdf
+  command: "/bin/bash -c 'asdf plugin-remove erlang && asdf plugin-remove elixir && rm -rf ~/.asdf'"
+
+- name: Fonte do ambiente
+  command: ". $HOME/.bashrc"
