@@ -1,0 +1,30 @@
+---
+- name: install prerequisite libraries for erlang 
+  community.general.homebrew:
+    update_homebrew: true
+    name:
+    - autoconf
+    - openssl@1.1
+    - openssl@3
+    - wxwidgets
+    - libxslt
+    - fop
+    - openjdk
+  when: ansible_system == 'Darwin'
+
+- name: sh env
+  ansible.builtin.shell:
+  args:
+    cmd: "{{ shenv_cmd }}"
+    chdir: '{{ ansible_user_dir }}/'
+  register: shenv
+- name: asdf plugin add erlang
+  ansible.builtin.shell: |
+    {{ source }}
+    asdf plugin add erlang
+  args:
+    executable: '{{ ansible_user_shell }}'
+  register: result
+  failed_when: result.rc != 0 and result.stderr | regex_search('(Plugin named .* already added)') == ''
+  vars:
+    source: "{{ shenv.stdout_lines | map('regex_replace', '(^)', '. ') | join('\n') }}"

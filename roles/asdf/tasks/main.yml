@@ -1,0 +1,5 @@
+---
+- name: Install asdf Multiple Runtime Version Manager
+  homebrew:
+    name: asdf
+    state: latest

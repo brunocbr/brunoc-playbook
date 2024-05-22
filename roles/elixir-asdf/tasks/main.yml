@@ -1,0 +1,17 @@
+---
+- name: sh env
+  ansible.builtin.shell:
+  args:
+    cmd: "{{ shenv_cmd }}"
+    chdir: '{{ ansible_user_dir }}/'
+  register: shenv
+- name: asdf plugin add elixir
+  ansible.builtin.shell: |
+    {{ source }}
+    asdf plugin add elixir
+  args:
+    executable: '{{ ansible_user_shell }}'
+  register: result
+  failed_when: result.rc != 0 and result.stderr | regex_search('(Plugin named .* already added)') == ''
+  vars:
+    source: "{{ shenv.stdout_lines | map('regex_replace', '(^)', '. ') | join('\n') }}"

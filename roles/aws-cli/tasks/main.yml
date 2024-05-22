@@ -1,0 +1,7 @@
+---
+- name: Install AWS Command-Line Interface
+  homebrew:
+    name: awscli
+    state: latest
+
+
