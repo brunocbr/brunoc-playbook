@@ -247,8 +247,23 @@
       vars:
         swish_dir: /usr/local/share/swish
 
-    - role: elixir
-      tags: [devel, elixir]
+    - role: asdf
+      tags: [devel, beam, asdf]
+      vars:
+        asdf: v0.14.0
+
+    - role: erlang-asdf
+      tags: [devel, beam, erlang-asdf]
+      vars:
+        erlang: latest
+
+    - role: elixir-asdf
+      tags: [devel, beam, elixir-asdf]
+      vars:
+        elixir: latest
+
+    # - role: elixir
+    #   tags: [devel, beam, elixir]
 
     #############################################################################
     # Shell #####################################################################
@@ -283,6 +298,9 @@
 
     - role: ffmpeg
       tags: [shell, brew-pkg, ffmpeg]
+
+    - role: aws-cli
+      tags: [shell, aws-cli]
 
 
     #####################
