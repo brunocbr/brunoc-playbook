@@ -11,3 +11,9 @@ latex_packages:
   - titling
   - xcolor
   - bigfoot
+  - needspace
+  - marginnote
+  - imakeidx
+  - sectsty
+  - lipsum
+  - titlepic
