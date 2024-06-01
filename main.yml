@@ -252,6 +252,9 @@
       vars:
         asdf: v0.14.0
 
+    # FIXME: requer Xcode Command Line Tools + XCode completo, instalado
+    # manualmente
+
     - role: erlang-asdf
       tags: [devel, beam, erlang-asdf]
       vars:

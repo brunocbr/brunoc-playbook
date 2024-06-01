@@ -1,4 +1,3 @@
----
-- shprofile: "{{ ansible_user_dir }}/.{{ ansible_user_shell | basename | regex_replace('$', '_') | regex_replace('zsh_', 'z') }}profile"
-- shrc: "{{ ansible_user_dir }}/.{{ ansible_user_shell | basename }}rc"
-- sh: "{{ ansible_user_shell | basename | quote }}"
+shprofile: "{{ ansible_user_dir }}/.{{ ansible_user_shell | basename | regex_replace('$', '_') | regex_replace('zsh_', 'z') }}profile"
+shrc: "{{ ansible_user_dir }}/.{{ ansible_user_shell | basename }}rc"
+sh: "{{ ansible_user_shell | basename | quote }}"

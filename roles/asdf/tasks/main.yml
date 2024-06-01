@@ -1,5 +1,22 @@
 ---
-- name: Install asdf Multiple Runtime Version Manager
-  homebrew:
-    name: asdf
-    state: latest
+- name: install asdf by Homebrew
+  community.general.homebrew:
+    update_homebrew: true
+    name:
+      - asdf
+- name: Baixar o asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: ~/.asdf
+    version: "{{ asdf }}"
+  become: false
+
+- name: Adicionar asdf ao shell
+  lineinfile:
+    path: "{{ shprofile }}"
+    line: "{{ item }}"
+  loop:
+    - ". $HOME/.asdf/asdf.sh"
+    - ". $HOME/.asdf/completions/asdf.bash"
+
+

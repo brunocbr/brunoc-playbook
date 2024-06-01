@@ -1,5 +1,5 @@
 ---
-- name: install prerequisite libraries for erlang 
+- name: install prerequisite libraries for erlang
   community.general.homebrew:
     update_homebrew: true
     name:
@@ -8,8 +8,8 @@
     - openssl@3
     - wxwidgets
     - libxslt
-    - fop
-    - openjdk
+#    - fop
+#    - openjdk
   when: ansible_system == 'Darwin'
 
 - name: sh env
