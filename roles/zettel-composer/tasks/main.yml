@@ -1,0 +1,8 @@
+---
+- name: Symlink zettel-compose.py to /usr/local/bin
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/src/zettel-composer/zettel-compose.py"
+    dest: /usr/local/bin/zettel-compose
+    state: link
+    mode: '0755'
+  become: true

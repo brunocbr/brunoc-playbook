@@ -237,6 +237,9 @@
     - role: profile-links
       tags: [git-pvt-repo, profile-links, profile]
 
+    - role: zettel-composer
+      tags: [git-pvt-repo, zettel-composer]
+
     ## Devel
 
     - role: swi-prolog
