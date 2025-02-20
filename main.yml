@@ -79,6 +79,8 @@
       vars:
         yarn_version: "1.22.19"
 
+    - role: java
+      tags: [pkg-installer, java]
 
 #    - role: maven
 #      tags: [foundational, package-and-build, brew-pkg, maven]
