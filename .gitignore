@@ -3,3 +3,4 @@
 /galaxy
 /group_vars/localhost/vars.yml
 /main.retry
+/vault.yaml

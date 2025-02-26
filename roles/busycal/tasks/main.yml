@@ -1,7 +1,7 @@
 ---
 - name: Download BusyCal DMG
   get_url:
-    url: "https://www.busymac.com/download/bcl-2022.2.3-2022-09-22-10-11.dmg.zip"
+    url: "https://www.busymac.com/download/BusyCal.dmg"
     dest: "/tmp/BusyCal.dmg"
 - name: Mount DMG
   command: "hdiutil attach /tmp/BusyCal.dmg"

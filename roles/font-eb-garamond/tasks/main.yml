@@ -2,6 +2,7 @@
 - name: Tap cask-fonts
   homebrew_tap:
     name: homebrew/cask-fonts
+
 - name: Install EB Garamond Fonts
   homebrew_cask:
     name: font-eb-garamond

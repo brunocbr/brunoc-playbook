@@ -26,11 +26,12 @@
     - role: make
       tags: [foundational, package-and-build, brew-pkg, make]
 
-    - role: cmake
-      tags: [foundational, package-and-build, bespoke-pkg, cmake]
-      vars:
-        # https://cmake.org/download/
-        cmake_version: "3.22.0"
+# FIXME:
+#    - role: cmake
+#      tags: [foundational, package-and-build, bespoke-pkg, cmake]
+#      vars:
+#        # https://cmake.org/download/
+#        cmake_version: "3.22.0"
 
     - role: llvm
       tags: [foundational, package-and-build, brew-pkg, llvm]
@@ -42,24 +43,24 @@
     - role: bash
       tags: [foundational, brew-pkg, programming-languages, bash]
 
-    - role: python3
-      tags: [foundational, programming-languages, bespoke-pkg, python3]
-      vars:
-        # NOTE: update PYTHON_VERSION in Makefile when changing this.
-        # https://www.python.org/ftp/python/
-        python3_version: "3.11.2"
-        # 11 is a "Universal 2" binary which works on Apple Silicon.
-        # 10.9 does not work on Apple Silicon.
-        python3_macos_version: "11" # this is used in the .pkg file name.
-        python3_version_major_minor: "{{ python3_version | regex_replace('^([0-9]+)\\.([0-9]+)(?:\\.[0-9]+)?$', '\\1.\\2') }}"
+#    - role: python3
+#      tags: [foundational, programming-languages, bespoke-pkg, python3]
+#      vars:
+#        # NOTE: update PYTHON_VERSION in Makefile when changing this.
+#        # https://www.python.org/ftp/python/
+#        python3_version: "3.11.2"
+#        # 11 is a "Universal 2" binary which works on Apple Silicon.
+#        # 10.9 does not work on Apple Silicon.
+#        python3_macos_version: "11" # this is used in the .pkg file name.
+#        python3_version_major_minor: "{{ python3_version | regex_replace('^([0-9]+)\\.([0-9]+)(?:\\.[0-9]+)?$', '\\1.\\2') }}"
 
-    - role: mac-ports
-      tags: [foundational, package-and-build, bespoke-pkg, mac-ports]
-      vars:
-        # https://www.macports.org/install.php
-        macports_version: "2.8.1"
-#        macports_mac_release: "12-Monterey"
-        macports_mac_release: "10.15-Catalina"
+#    - role: mac-ports
+#      tags: [foundational, package-and-build, bespoke-pkg, mac-ports]
+#      vars:
+#        # https://www.macports.org/install.php
+#        macports_version: "2.8.1"
+##        macports_mac_release: "12-Monterey"
+#        macports_mac_release: "10.15-Catalina"
 
 
     - role: node
@@ -79,8 +80,9 @@
       vars:
         yarn_version: "1.22.19"
 
-    - role: java
-      tags: [pkg-installer, java]
+# FIXME
+#    - role: java
+#      tags: [pkg-installer, java]
 
 #    - role: maven
 #      tags: [foundational, package-and-build, brew-pkg, maven]
@@ -96,17 +98,18 @@
       tags: [vpn, macos, tailscale]
 
     - role: seafile-client-mac
-      tags: [desktop-applications, macos, pkg-installer, seafile-client]
+      tags: [desktop-applications, vpn, macos, pkg-installer, seafile-client]
 
       ## TODO: Hazel + license
       ## TODO: config & links phi alpha...
 
     #############################################################################
-    # Fonts #####################################################################
+   # Fonts #####################################################################
     #############################################################################
 
-    - role: font-hack
-      tags: [fonts, brew-cask-pkg, font-hack]
+# casks fonts are dead
+#    - role: font-hack
+#      tags: [fonts, brew-cask-pkg, font-hack]
 
     - role: consolas
       tags: [fonts, bespoke-pkg, consolas]
@@ -117,12 +120,13 @@
     - role: font-iosevka
       tags: [editors, font-iosevka]
 
-    # não funciona no Catalina
-    - role: ia-duospace
-      tags: [fonts, ia-duospace]
+    - role: ia-duospace-font
+      tags: [fonts, ia-duospace-font]
 
-    - role: font-eb-garamond
-      tags: [fonts, font-eb-garamond]
+# TODO: Dejavu, Menlo, EB Garamond
+
+#    - role: font-eb-garamond
+#      tags: [fonts, font-eb-garamond]
 
     ###################
     # Browser & Tools #
@@ -153,7 +157,7 @@
       tags: [doing, gem-pkg]
 
 #    - role: sophos-home-mac
-#      tags: [macos, sophos-home-mac]
+#      tags: [macos, security, sophos-home-mac]
 
 
 
@@ -164,18 +168,17 @@
     - role: emacs-pre-built
       tags: [text-editors, bespoke-pkg, emacs-pre-built]
       vars:
-        emacs_pre_built_version: "29.1"
+        emacs_pre_built_version: "30.1"
         emacs_pre_built_patch: ""
 
-    # - role: spacemacs
-    #   tags: [macos, spacemacs, writing]
-    #   vars:
-    #     users:
-    #       - username: brunoc
+    - role: spacemacs
+      tags: [macos, spacemacs, writing]
+      vars:
+        spacemacs_user: "brunoc"
 
     - role: pandoc
       vars:
-        pandoc_version: 3.1.6.1
+        pandoc_version: 3.6.3
       tags: [bespoke-pkg, writing, pandoc]
 
     # - role: texlive
@@ -321,8 +324,10 @@
     - role: mas
       tags: [macos, foundational, mas]
 
-#    - role: devonthink
-#      tags: [macos, desktop-applications, devonthink]
+    - role: devonthink
+      vars:
+        - devonthink_version: "3.9.8"
+      tags: [macos, desktop-applications, devonthink]
 
     - role: busycal
       tags: [macos, planning, busycal]
@@ -367,5 +372,8 @@
 
     - role: screens
       tags: [screens, macos]
+
+    - role: luna-display
+      tags: [luna-display, macos]
 
 

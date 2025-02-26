@@ -1,6 +1,7 @@
 # Catalina | 3.7
 # Big Sur  | 3.8
 # Ventura  | 3.9
+export ANSIBLE_ASK_SUDO_PASS=true
 SYSTEM_PYTHON                  := /usr/bin/python3
 BOOTSTRAP_PYTHON_MAJOR_VERSION := $(shell ./semver.sh "$$($(SYSTEM_PYTHON) --version | cut -d' ' -f2)" | sed -n '1 p')
 BOOTSTRAP_PYTHON_MINOR_VERSION := $(shell ./semver.sh "$$($(SYSTEM_PYTHON) --version | cut -d' ' -f2)" | sed -n '2 p')
@@ -10,9 +11,9 @@ BOOTSTRAP_PYTHON_BIN_PATH      := ~/Library/Python/$(BOOTSTRAP_PYTHON_VERSION)/b
 BOOTSTRAP_PIP                  := $(BOOTSTRAP_PYTHON) -m pip
 
 # NOTE: this reflects the "python3_version" in the "python" role in main.yml.
-PYTHON_VERSION               := 3.11
+PYTHON_VERSION               := 3.9
 PYTHON_BIN_PATH              := ~/Library/Python/$(PYTHON_VERSION)/bin
-PYTHON                       := /usr/local/bin/python$(PYTHON_VERSION)
+PYTHON                       := /usr/bin/python3
 PIP                          := $(PYTHON) -m pip
 
 PROJECT_ROOT                 := $(shell pwd)

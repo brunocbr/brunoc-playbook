@@ -1,14 +1,14 @@
 ---
 - name: Download DEVONthink Pro DMG
   get_url:
-    url: "https://download.devontechnologies.com/download/devonthink/3.9.2/DEVONthink_3.dmg.zip"
+    url: "https://download.devontechnologies.com/download/devonthink/{{ devonthink_version }}/DEVONthink_3.dmg.zip"
     dest: "/tmp/devonthink.dmg.zip"
 - name: Unzip DMG
   command: "unzip -o /tmp/devonthink.dmg.zip -d /tmp"
   register: unzip_result
 
 - name: Mount DEVONthink DMG
-  command: "yes Y | hdiutil attach /tmp/DEVONthink_3.dmg"
+  command: "yes Y | hdiutil attach /tmp/DEVONthink_3.dmg -quiet -nobrowse"
   register: mounted_dmg
   changed_when: false
   when: unzip_result is succeeded
