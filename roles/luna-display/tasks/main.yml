@@ -1,0 +1,25 @@
+---
+- name: Download Luna Display for Desktop
+  get_url:
+    url: "https://downloads.astropad.com/luna/mac/latest"
+    dest: "/tmp/LunaDisplay.dmg"
+
+- name: Mount DMG
+  command: "hdiutil attach /tmp/LunaDisplay.dmg"
+  register: mounted_dmg
+  changed_when: false
+
+- name: Copy to Applications
+  become: yes
+  command: "cp -R '/Volumes/Luna Display/Luna Display.app' '/Applications/'"
+  when: mounted_dmg is succeeded
+
+- name: Unmount DMG
+  command: "hdiutil detach '/Volumes/Luna Display'"
+  when: mounted_dmg is succeeded
+
+- name: Remove downloaded DMG
+  file:
+    path: "/tmp/LunaDisplay.dmg"
+    state: absent
+
