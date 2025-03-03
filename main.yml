@@ -323,6 +323,9 @@
     - role: aws-cli
       tags: [shell, aws-cli]
 
+    - role: rclone
+      tags: [shell, rclone]
+
 
     #####################
     # Productivity Apps #
