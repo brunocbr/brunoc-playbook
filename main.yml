@@ -80,6 +80,11 @@
       vars:
         yarn_version: "1.22.19"
 
+    - role: java
+      tags: [bespoke-pkg, java]
+      vars:
+        java_version: "21"
+
 # FIXME
 #    - role: java
 #      tags: [pkg-installer, java]
@@ -170,6 +175,11 @@
       vars:
         emacs_pre_built_version: "30.1"
         emacs_pre_built_patch: ""
+
+    - role: emacs-plus
+      tags: [text-editors, beskpoke-pkg, emacs-plus]
+      vars:
+        emacs_version: "30"
 
     - role: spacemacs
       tags: [macos, spacemacs, writing]
@@ -356,6 +366,11 @@
 
     - role: ms-teams
       tags: [macos, ms-teams, pkg-installer]
+
+    - role: davmail
+      vars:
+        davmail_version: "6.3.0"
+      tags: [davmail]
 
     #################
     # Remote Access #
