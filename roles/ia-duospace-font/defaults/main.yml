@@ -1,0 +1,9 @@
+---
+font_install_path: "{{ ansible_env.HOME }}/Library/Fonts"
+fonts:
+  - iAWriterDuoS-Bold.ttf
+  - iAWriterDuoS-BoldItalic.ttf
+  - iAWriterDuoS-Italic.ttf
+  - iAWriterDuoS-Regular.ttf
+  - iAWriterDuoV.ttf
+  - iAWriterDuoV-Italic.ttf
