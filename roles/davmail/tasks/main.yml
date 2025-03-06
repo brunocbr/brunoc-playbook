@@ -1,0 +1,26 @@
+---
+- name: Download DavMail for MacOS version {{ davmail_version }}
+  get_url:
+    url: "https://ci.appveyor.com/api/projects/mguessan/davmail/artifacts/dist%2FDavMail-MacOSX-{{ davmail_version }}-trunk.app.zip?job=Environment%3A%20JAVA_HOME%3DC%3A%5CProgram%20Files%5CJava%5Cjdk1.8.0"
+    dest: "/tmp/DavMail.app.zip"
+
+- name: Unzip DavMail archive
+  unarchive:
+    src: "/tmp/DavMail.app.zip"
+    dest: "/Applications"
+    remote_src: yes
+  become: yes
+
+
+- name: Instalar Fetchmail
+  homebrew:
+    name: fetchmail
+    state: present
+
+- name: Instalar Procmail
+  homebrew:
+    name: procmail
+    state: present
+
+
+    
