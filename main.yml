@@ -230,6 +230,9 @@
           - ZettelComposer - com grego
       tags: [macos, writing, zettel-compose-apps]
 
+    - role: kaleidoscope
+      tags: [macos, writing, kaleidoscope]
+
     ################
     # My git stuff #
     ################

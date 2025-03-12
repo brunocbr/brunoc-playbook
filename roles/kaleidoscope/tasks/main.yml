@@ -1,0 +1,4 @@
+- name: Install Kaleidoscope v.2 using Homebrew
+  homebrew:
+    name: kaleidoscope@2
+    state: present
