@@ -85,6 +85,10 @@
       vars:
         java_version: "21"
 
+    - role: rosetta
+      tags: [macos, rosetta, foundational]
+      
+
 # FIXME
 #    - role: java
 #      tags: [pkg-installer, java]

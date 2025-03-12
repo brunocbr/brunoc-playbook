@@ -1,0 +1,3 @@
+---
+- name: Install Rosetta 2
+  command: /usr/sbin/softwareupdate --install-rosetta --agree-to-license
