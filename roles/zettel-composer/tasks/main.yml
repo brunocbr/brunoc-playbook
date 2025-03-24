@@ -6,3 +6,10 @@
     state: link
     mode: '0755'
   become: true
+
+- name: Install pyobjc using pip
+  ansible.builtin.pip:
+    name: pyobjc
+    state: present
+    extra_args: -U
+  become: true
