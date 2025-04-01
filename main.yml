@@ -367,6 +367,9 @@
     - role: mindnode
       tags: [macos, mindnode]
 
+    - role: xmind
+      tags: [macos, xmind]
+
     ###################
     # Microsoft Stuff #
     ###################

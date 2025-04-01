@@ -1,0 +1,23 @@
+---
+- name: Download Xmind DMG
+  get_url:
+    url: "https://www.xmind.app/zen/download/mac/"
+    dest: "/tmp/Xmind.dmg"
+
+- name: Mount Xmind DMG
+  command: "hdiutil attach /tmp/Xmind.dmg -quiet -nobrowse"
+  register: mounted_dmg
+
+- name: Copy Xmind to Applications
+  become: yes
+  command: "cp -R /Volumes/Xmind/Xmind.app /Applications/"
+  when: mounted_dmg is succeeded
+
+- name: Unmount Xmind DMG
+  command: "hdiutil detach /Volumes/Xmind"
+  when: mounted_dmg is succeeded
+
+- name: Remove downloaded DMG
+  file:
+    path: "/tmp/Xmind.dmg"
+    state: absent
