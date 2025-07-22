@@ -1,0 +1,5 @@
+---
+- name: Install Day One journal app
+  community.general.mas:
+    id: 1055511498
+    state: present
