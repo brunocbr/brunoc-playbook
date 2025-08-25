@@ -1,0 +1,5 @@
+---
+- name: Install OmniFocus
+  community.general.mas:
+    id: 1542143627
+    state: present
