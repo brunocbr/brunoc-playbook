@@ -237,6 +237,9 @@
     - role: kaleidoscope
       tags: [macos, writing, kaleidoscope]
 
+    - role: dayone
+      tags: [dayone, macos]
+
     ################
     # My git stuff #
     ################
