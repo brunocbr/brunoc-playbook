@@ -373,6 +373,9 @@
     - role: xmind
       tags: [macos, xmind]
 
+    - role: omnifocus
+      tags: [macos, omnifocus]
+
     ###################
     # Microsoft Stuff #
     ###################
