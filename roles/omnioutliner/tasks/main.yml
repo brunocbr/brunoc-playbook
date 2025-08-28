@@ -1,0 +1,33 @@
+---
+- name: Create temporary dir
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download OmniOutliner DMG
+  get_url:
+    url: "https://www.omnigroup.com/download/latest/omnioutliner/"
+    dest: "{{ temp_dir.path }}/omnioutliner-latest.dmg"
+
+- name: Convert DMG to CDR
+  command: "hdiutil convert {{ temp_dir.path }}/omnioutliner-latest.dmg -format UDTO -quiet -o {{ temp_dir.path }}/omnioutliner-latest.cdr"
+    
+- name: Mount CDR
+  command: "hdiutil attach {{ temp_dir.path }}/omnioutliner-latest.cdr -quiet -nobrowse -noverify -noautoopen"
+  register: mounted_dmg
+  changed_when: false
+
+- name: Copy to Applications
+  become: yes
+  command: "cp -R '/Volumes/OmniOutliner/OmniOutliner.app' '/Applications/'"
+  when: mounted_dmg is succeeded
+
+- name: Unmount DMG
+  command: "hdiutil detach '/Volumes/OmniOutliner'"
+  when: mounted_dmg is succeeded
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent
+

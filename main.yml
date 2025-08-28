@@ -240,6 +240,9 @@
     - role: dayone
       tags: [dayone, macos]
 
+    - role: omnioutliner
+      tags: [omnioutliner, writing, macos]
+
     ################
     # My git stuff #
     ################
