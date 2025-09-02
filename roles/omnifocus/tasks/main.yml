@@ -1,5 +1,32 @@
 ---
-- name: Install OmniFocus
-  community.general.mas:
-    id: 1542143627
-    state: present
+- name: Create temporary dir
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Download OmniFocus DMG
+  get_url:
+    url: "https://www.omnigroup.com/download/latest/omnifocus/"
+    dest: "{{ temp_dir.path }}/omnifocus-latest.dmg"
+
+- name: Convert DMG to CDR
+  command: "hdiutil convert {{ temp_dir.path }}/omnifocus-latest.dmg -format UDTO -quiet -o {{ temp_dir.path }}/omnifocus-latest.cdr"
+
+- name: Mount CDR
+  command: "hdiutil attach {{ temp_dir.path }}/omnifocus-latest.cdr -quiet -nobrowse -noverify -noautoopen"
+  register: mounted_dmg
+  changed_when: false
+
+- name: Copy to Applications
+  become: yes
+  command: "cp -R '/Volumes/OmniFocus/OmniFocus.app' '/Applications/'"
+  when: mounted_dmg is succeeded
+
+- name: Unmount DMG
+  command: "hdiutil detach '/Volumes/OmniFocus'"
+  when: mounted_dmg is succeeded
+
+- name: Remove temporary directory
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent
