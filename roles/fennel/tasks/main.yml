@@ -1,0 +1,68 @@
+---
+# tasks/main.yml
+# Role: writers_gadget_dev
+# Instala ferramentas básicas + Lua + Fennel no macOS
+
+- name: Ensure Homebrew is available
+  command: brew --version
+  register: brew_check
+  changed_when: false
+  failed_when: brew_check.rc != 0
+
+# -----------------------
+# Ferramentas básicas
+# -----------------------
+
+- name: Install basic development tools
+  community.general.homebrew:
+    name:
+      - git
+      - cmake
+      - ninja
+      - pkg-config
+      - coreutils
+    state: present
+    update_homebrew: false
+
+# -----------------------
+# Lua (host)
+# -----------------------
+
+- name: Install Lua
+  community.general.homebrew:
+    name: lua
+    state: present
+
+- name: Verify Lua installation
+  command: lua -v
+  register: lua_version
+  changed_when: false
+
+# -----------------------
+# Fennel
+# -----------------------
+
+- name: Install Fennel
+  community.general.homebrew:
+    name: fennel
+    state: present
+
+- name: Verify Fennel installation
+  command: fennel --version
+  register: fennel_version
+  changed_when: false
+
+# -----------------------
+# Debug output (optional)
+# -----------------------
+
+- name: Show installed versions
+  debug:
+    msg:
+      - "Lua: {{ lua_version.stdout | default(lua_version.stderr) }}"
+      - "Fennel: {{ fennel_version.stdout | default(fennel_version.stderr) }}"
+
+- name: Install rlwrap (REPL fallback)
+  community.general.homebrew:
+    name: rlwrap
+    state: present
