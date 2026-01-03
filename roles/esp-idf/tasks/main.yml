@@ -1,0 +1,54 @@
+- name: Install ESP-IDF dependencies via Homebrew
+  homebrew:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ninja
+    - cmake
+    - dfu-util
+  register: brew_deps
+
+- name: Clone ESP-IDF repository
+  git:
+    repo: https://github.com/espressif/esp-idf.git
+    dest: "{{ ansible_user_dir }}/esp/esp-idf"
+    version: v5.5.2
+    depth: 1
+    update: yes
+  register: esp_idf_clone
+
+- name: Install Python dependencies
+  pip:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - numpy
+    - pyserial
+    - future
+    - jinja2
+    - requests
+    - six
+  register: python_deps
+
+- name: Set environment variable for IDF_PATH
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.zshrc"
+    line: "export IDF_PATH={{ ansible_user_dir }}/esp/esp-idf"
+    create: yes
+  register: env_var
+
+- name: Load environment variables
+  shell: "source {{ ansible_user_dir }}/.zshrc"
+  args:
+    executable: /bin/zsh
+  when: env_var.changed
+
+- name: Install ESP32-S3 tools
+  shell: |
+    cd {{ ansible_user_dir }}/esp/esp-idf
+    ./install.sh esp32s3
+  args:
+    executable: /bin/bash
+
+
+    

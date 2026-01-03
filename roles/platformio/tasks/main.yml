@@ -1,0 +1,14 @@
+---
+- name: Install PlatformIO using pip
+  pip:
+    name: platformio
+    state: present
+    executable: pip3
+
+- name: Verify PlatformIO installation
+  shell: pio --version
+  register: pio_version
+
+- name: Show PlatformIO version
+  debug:
+    msg: "PlatformIO version installed: {{ pio_version.stdout }}"

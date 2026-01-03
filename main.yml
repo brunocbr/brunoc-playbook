@@ -87,6 +87,8 @@
 
     - role: rosetta
       tags: [macos, rosetta, foundational]
+
+      ## TODO: XCode, com agreement e xcodebuild -runFirstLaunch
       
 
 # FIXME
@@ -296,6 +298,15 @@
       vars:
         elixir: latest
 
+    - role: fennel
+      tags: [devel, fennel]
+
+    - role: esp-idf
+      tags: [devel, esp, esp-idf]
+
+    - role: platformio
+      tags: [devel, esp, platformio]
+
     # - role: elixir
     #   tags: [devel, beam, elixir]
 
@@ -413,4 +424,9 @@
     - role: luna-display
       tags: [luna-display, macos]
 
+    #####################
+    # IA & Data Science #
+    #####################
 
+    - role: llamaindex
+      tags: [llamaindex]
