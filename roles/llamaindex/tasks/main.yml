@@ -1,0 +1,89 @@
+---
+
+# - name: Install pyenv + pyenv-virtualenv using Homebrew
+#   homebrew:
+#     name:
+#       - pyenv
+#       - pyenv-virtualenv
+#     state: present
+
+# - name: Get pyenv root
+#   shell: pyenv root
+#   register: pyenv_root_res
+#   become: no
+
+# - name: Convert register variable to dict
+#   set_fact:
+#     pyenv_root: "{{ pyenv_root_res.stdout }}"
+#   become: no
+
+# - name: "Install Python version {{ python_version }} in pyenv if not already available"
+#   command: "pyenv install -s {{ python_version }}"
+#   args:
+#     creates: "{{ pyenv_root }}/versions/{{ python_version }}"
+#   become: no
+
+# - name: "Set Python version {{ python_version }} globally"
+#   command: "pyenv global {{ python_version }}"
+
+# TODO: install in zshrc/zprofile
+
+
+# - name: "Create virtual environment with Python {{ python_version }}"
+#   command: "pyenv-virtualenv {{ python_version }} llamaindex"
+#   args:
+#     creates: "{{ pyenv_root }}/llamaindex/bin/activate"
+#   become: no
+
+#  environment:
+#    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+
+
+- name: Create virtual environment if it doesn't exist
+  command: python3 -m venv "{{ venv_path }}/llamaindex"
+  args:
+    creates: "{{ venv_path }}/llamaindex/bin/activate"
+  become: no
+
+- name: Install required Python packages in the virtual environment
+  pip:
+    name:
+      - openai
+      - llama-index
+      - llama-index-vector-stores-chroma
+      - llama-index-embeddings-huggingface
+      - chromadb
+      - sentence-transformers
+      - bibtexparser
+      - click
+    virtualenv: "{{ venv_path }}/llamaindex"
+  become: no
+
+- name: Ensure directory for LlamaIndex config exists
+  file:
+    path: "{{ home_directory }}/.llamaindex"
+    state: directory
+    mode: '0755'
+  become: no
+
+- name: Create a configuration file for LlamaIndex
+  template:
+    src: llamaindex_config.j2
+    dest: "{{ home_directory }}/.llamaindex/config.yaml"
+    mode: '0644'
+  become: no
+
+- name: Set OpenAI API key in environment variables
+  lineinfile:
+    path: "{{ home_directory }}/.zshrc"
+    line: 'export OPENAI_API_KEY="{{ openai_api_key }}"'
+    create: yes
+  become: no
+
+# - name: Add activation of virtual environment to .bashrc
+#   lineinfile:
+#     path: "{{ home_directory }}/.bashrc"
+#     line: 'source {{ venv_path }}/bin/activate'
+#     create: yes
+#   become: no
+
