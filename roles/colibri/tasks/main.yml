@@ -1,0 +1,5 @@
+---
+- name: Install Colibri player
+  community.general.mas:
+    id: 1178295426
+    state: present

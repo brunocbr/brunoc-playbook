@@ -176,16 +176,19 @@
     # Writing and Teaching #
     ########################
 
-    - role: emacs-pre-built
-      tags: [text-editors, bespoke-pkg, emacs-pre-built]
-      vars:
-        emacs_pre_built_version: "30.1"
-        emacs_pre_built_patch: ""
+    # - role: emacs-pre-built
+    #   tags: [text-editors, bespoke-pkg, emacs-pre-built]
+    #   vars:
+    #     emacs_pre_built_version: "30.1"
+    #     emacs_pre_built_patch: ""
 
-    - role: emacs-plus
-      tags: [text-editors, beskpoke-pkg, emacs-plus]
-      vars:
-        emacs_version: "30"
+    # - role: emacs-plus
+    #   tags: [text-editors, beskpoke-pkg, emacs-plus]
+    #   vars:
+    #     emacs_version: "30"
+
+    - role: emacs-mac
+      tags: [text-editors, bespoke-pkg, emacs-mac]
 
     - role: spacemacs
       tags: [macos, spacemacs, writing]
@@ -211,6 +214,9 @@
 
     - role: marked
       tags: [macos, mac-tools, writing, marked]
+
+    - role: word-count-ble
+      tags: [writing, wiggy]
 
     - role: word-counter
       vars:
@@ -430,3 +436,18 @@
 
     - role: llamaindex
       tags: [llamaindex]
+
+    - role: claude-code
+      tags: [claude-code]
+
+
+    #########
+    # Music #
+    #########
+
+    - role: colibri
+      tags: [audio, colibri]
+
+    - role: qobuz-dl
+      tags: [audio, qobuz-dl]
+

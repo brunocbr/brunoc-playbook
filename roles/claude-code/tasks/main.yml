@@ -1,0 +1,13 @@
+---
+- name: Ensure Homebrew is available
+  command: brew --version
+  register: brew_check
+  changed_when: false
+  failed_when: brew_check.rc != 0
+
+- name: Install Claude Code cask
+  community.general.homebrew_cask:
+    name:
+      - claude-code
+    state: present
+    update_homebrew: false

@@ -19,5 +19,8 @@ latex_packages:
   - titlepic
   - syllogism
   - xstring
+  - collection-langgreek
+
+
 
 

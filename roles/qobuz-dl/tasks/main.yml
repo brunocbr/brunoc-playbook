@@ -1,0 +1,7 @@
+---
+- name: Garantir a instalação isolada do qobuz-dl (Ultimate Edition) via pipx
+  community.general.pipx:
+    name: qobuz-dl-ultimate
+    state: latest
+    executable: /opt/homebrew/bin/pipx  # Força o Ansible a usar o pipx do ecossistema Homebrew
+  tags: [audio, qobuz-dl]
