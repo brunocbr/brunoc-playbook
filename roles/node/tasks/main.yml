@@ -1,14 +1,6 @@
 ---
-- name: Download Node.js
-  get_url:
-    url: https://nodejs.org/dist/v{{ node_version }}/{{ node_pkg }}
-    dest: "{{ downloads_directory }}/{{ node_pkg }}"
+- name: Instala Node.js via Homebrew
+  community.general.homebrew:
+    name: node
+    state: present
 
-- name: Install Node.js
-  command: >
-    chdir={{ downloads_directory }}
-    installer -package {{ node_pkg }} -target /
-  become: yes
-
-- name: Make sure npm installation prefix for global packages is sane
-  command: npm config set prefix /usr/local

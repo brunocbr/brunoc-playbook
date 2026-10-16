@@ -1,0 +1,21 @@
+---
+- name: Configurar OpenClaw no macOS
+  when: ansible_facts['os_family'] == 'Darwin'
+  block:
+    - name: Instalar o OpenClaw globalmente via npm
+      community.general.npm:
+        name: openclaw
+        # Para a versão beta vista na documentação, descomente a linha abaixo:
+        # version: beta
+        global: true
+        state: present
+      become: yes
+
+    - name: Verificar versão instalada do OpenClaw
+      ansible.builtin.command: openclaw --version
+      register: openclaw_version
+      changed_when: false
+
+    - name: Exibir versão instalada
+      ansible.builtin.debug:
+        msg: "OpenClaw configurado: {{ openclaw_version.stdout }}. Rode manualmente: openclaw onboard."

@@ -65,20 +65,16 @@
 
     - role: node
       tags: [foundational, programming-languages, bespoke-pkg, node]
-      vars:
-        # https://nodejs.org/dist/
-        # https://github.com/nodejs/node/releases
-        node_version: "18.17.0"
 
     - role: gulp
       tags: [npm-pkg, gulp]
       vars:
-        gulp_version: "4.0.2"
+        gulp_version: "latest"
 
     - role: yarn
       tags: [npm-pkg, yarn]
       vars:
-        yarn_version: "1.22.19"
+        yarn_version: "latest"
 
     - role: java
       tags: [bespoke-pkg, java]
@@ -439,6 +435,9 @@
 
     - role: claude-code
       tags: [claude-code]
+
+    - role: openclaw
+      tags: [openclaw]
 
 
     #########
